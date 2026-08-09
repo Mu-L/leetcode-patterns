@@ -803,8 +803,8 @@ export default function QuestionsTable({ data, updatedDate }: { data: Question[]
   }, [syncNow]);
 
   const exportProgress = useCallback(() => {
-    const payload = { completed: [...completed], starred: [...starred], notes, solvedDates, reminders };
-    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+    const payload = { completed: [...completed].sort((a, b) => a - b), starred: [...starred].sort((a, b) => a - b), notes, solvedDates, reminders };
+    const blob = new Blob([JSON.stringify(payload, null, 2) + "\n"], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
